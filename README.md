@@ -4,7 +4,6 @@ That would assist stakeholders with estimating the efficacy of speed and capacit
 
 # Data Preparation before developing Hurricane Idalia's Discrete Event Simulation (DES) Model 
 Part one of the script is to conduct Data Integration & Transformation, Data Cleaning, &
-# Data Preparation before developing Hurricane Idalia's Discrete Event Simulation (DES) Model 
 
 # Performing Feature Engineering and Data Exploration before developing the DES Model for Hurricane Idalia
 Part two of the script is to perform Data Feature Engineering and Data Exploration before 
@@ -15,4 +14,3 @@ In part three of the script a Hurricane Idalia Shelters and Affected Areas Map i
 Model Validation is based on the research questions and provides a statement that says if the null hypothesis per research question was rejected or failed to reject the null hypothesis (therefore accepting the alternative hypothesis)
 Two paired T-Test, Chi-Squared Test, Q-Q plot, Z-Score, and K-fold Cross Validation are test conducted within the script to test the model based on the research questions.
 These questions are tested based on these variables: speed, capabilities, capacity,and throughput (mobile logistics), in some cases evacuation people are also tested in addtion to planned network paths (network paths). 
-# Conducting a Discrete Event Simulation (DES) for Hurricane Idalia
