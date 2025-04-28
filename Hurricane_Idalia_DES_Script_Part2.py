@@ -6,7 +6,7 @@ This is a temporary script file.
 """
 
 #%% The purpose of this script is to perform Data Feature Engineering and Data Exploration before 
-# conducting a Discrete Event Simulation (DES) for Hurricane Idalia
+# Conducting a Discrete Event Simulation (DES) for Hurricane Idalia
 
 #%%
 # Importing Pacakges
@@ -42,7 +42,7 @@ mst_df = pd.merge(mln_df,emn_df, how='inner', on='id').drop_duplicates().drop(co
 pnst_df = pd.merge(pnpl_df,emn_df, how='inner', on='id').drop_duplicates().drop(columns = ['id'])\
     .rename(columns={'Throughput (Distance)' : 'Throughput'})
     
-# Dropping unnessary columns from pnst_df
+# Dropping unnecessary columns from pnst_df
 pnst_df = pnst_df.drop(columns=['fb_Longitude', 'fb_Latitude','Unnamed: 0'])
 
 # Dropping rows with NA values
@@ -69,7 +69,7 @@ fig2, ax = plt.subplots()
 sm.graphics.interaction_plot(mst_df['FACILITY_TYPE'], mst_df['Speed'], mst_df['Capabilities'], ax=ax)
 plt.show()
 
-# Identifying the interaction among Mobile Logistics, Capacity and Capabilities
+# Identifying the interaction among Mobile Logistics, Capacity, and Capabilities
 mst3_df = sm.OLS.from_formula('Capacity ~ FACILITY_TYPE * Capabilities', data = mst_df).fit()
 
 # Creating the interaction plots
@@ -77,7 +77,7 @@ fig3, ax = plt.subplots()
 sm.graphics.interaction_plot(mst_df['FACILITY_TYPE'], mst_df['Capabilities'], mst_df['Capacity'], ax=ax)
 plt.show()
 
-# Identifying the interaction among Mobile Logistics, Capacity and Throughput
+# Identifying the interaction among Mobile Logistics, Capacity, and Throughput
 mst4_df = sm.OLS.from_formula('Throughput ~ FACILITY_TYPE * Capacity', data = mst_df).fit()
 
 # Creating the interaction plots
@@ -86,7 +86,7 @@ sm.graphics.interaction_plot(mst_df['FACILITY_TYPE'], mst_df['Capacity'], mst_df
 plt.show()
 
 #%%
-# Identifying the interaction among Planned Network Path Locations, Speed and Throughput
+# Identifying the interaction among Planned Network Path Locations, Speed, and Throughput
 pnst1_df = sm.OLS.from_formula('Throughput ~ FACILITY_TYPE * Speed', data = pnst_df).fit()
 
 # Creating the interaction plots
@@ -94,7 +94,7 @@ fig5, ax = plt.subplots()
 sm.graphics.interaction_plot(pnst_df['FACILITY_TYPE'], pnst_df['Speed'], pnst_df['Throughput'], ax=ax)
 plt.show()
 
-# Identifying the interaction among Planned Network Path Locations, Speed and Capabilities
+# Identifying the interaction among Planned Network Path Locations, Speed, and Capabilities
 pnst2_df = sm.OLS.from_formula('Capabilities~ FACILITY_TYPE * Speed', data = pnst_df).fit()
 
 # Creating the interaction plots
@@ -102,7 +102,7 @@ fig6, ax = plt.subplots()
 sm.graphics.interaction_plot(pnst_df['FACILITY_TYPE'], pnst_df['Speed'], pnst_df['Capabilities'], ax=ax)
 plt.show()
 
-# Identifying the interaction among Planned Network Path Locations, Capacity and Capabilities
+# Identifying the interaction among Planned Network Path Locations, Capacity, and Capabilities
 pnst3_df = sm.OLS.from_formula('Capacity ~ FACILITY_TYPE * Capabilities', data = pnst_df).fit()
 
 # Creating the interaction plots
@@ -110,7 +110,7 @@ fig7, ax = plt.subplots()
 sm.graphics.interaction_plot(pnst_df['FACILITY_TYPE'], pnst_df['Capabilities'], pnst_df['Capacity'], ax=ax)
 plt.show()
 
-# Identifying the interaction among Planned Network Path Locations, Capacity and Throughput
+# Identifying the interaction among Planned Network Path Locations, Capacity, and Throughput
 pnst8_df = sm.OLS.from_formula('Throughput ~ FACILITY_TYPE * Capacity', data = pnst_df).fit()
 
 # Creating the interaction plots
@@ -119,16 +119,20 @@ sm.graphics.interaction_plot(pnst_df['FACILITY_TYPE'], pnst_df['Capacity'], pnst
 plt.show()
 
 #%%
-# Creating interaction features manually for speed and throughput for both dataframes (mst_df and pnst_df)
+# Creating interaction features manually for speed and throughput for both data frames (mst_df and pnst_df)
 mst_df['interaction'] = mst_df['Speed'] * mst_df['Throughput']
 pnst_df['interaction'] = pnst_df['Speed'] * pnst_df['Throughput']
 
 #%%
 ##################################################Data Exploration#########################################################
-# Generating five number summeries for Mobile Logistic Nodes, Planned Network Path Locations,
+# Generating five number summaries for Mobile Logistic Nodes, Planned Network Path Locations,
 # Evacuation Mean(mobile speed and capacity), Evacuation Nodes(evacuation zones by county), 
-# And Logistic Nodes and formatting the results into a table.
+# And Logistic Nodes and formatting the results into a table, Boxplots, and dropping unnecessary columns.
 
+# Dropping Unessary Columns
+mln_df = mln_df.drop(columns=['Unnamed: 0'])
+
+# Generating Five-Number Summaries
 mln_summary = mln_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -137,7 +141,23 @@ mln_table = mln_summary.reset_index().values.tolist()
 # Print the table using tabulate
 print(tabulate(mln_table, headers='firstrow', tablefmt='grid'))
 
+# Creating a box plot
+mln_df.boxplot(figsize=(10, 6))
 
+# Setting title and labels
+plt.title('Box Plot of Moble Logistic Nodes')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
+
+""""""""""""""""""
+
+# Dropping Unessary Columns
+pnpl_df = pnpl_df.drop(columns=['Unnamed: 0'])
+
+# Generating Five-Number Summaries
 pnpl_summary = pnpl_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -146,7 +166,20 @@ pnpl_table = pnpl_summary.reset_index().values.tolist()
 # Print the table using tabulate
 print(tabulate(pnpl_table, headers='firstrow', tablefmt='grid'))
 
+# Creating a box plot
+pnpl_df.boxplot(figsize=(10, 6))
 
+# Setting title and labels
+plt.title('Box Plot of Planned Network Path Locations')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
+
+""""""""""""""""""
+
+# Generating Five-Number Summaries
 em_summary = em_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -155,7 +188,20 @@ em_table = em_summary.reset_index().values.tolist()
 # Print the table using tabulate
 print(tabulate(em_table, headers='firstrow', tablefmt='grid'))
 
+# Creating a box plot
+em_df.boxplot(figsize=(10, 6))
 
+# Setting title and labels
+plt.title('Box Plot of Evacuation Mean')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
+
+""""""""""""""""""
+
+# Generating Five-Number Summaries
 en_summary = en_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -164,7 +210,22 @@ en_table = en_summary.reset_index().values.tolist()
 # Print the table using tabulate
 print(tabulate(en_table, headers='firstrow', tablefmt='grid'))
 
+# Creating a box plot
+en_df.boxplot(figsize=(10, 6))
 
+# Setting title and labels
+plt.title('Box Plot of Evacuation Mean Numbers')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
+
+""""""""""""""""""
+# Dropping Unessary Columns
+ln_df = ln_df.drop(columns=['Unnamed: 0'])
+
+# Generating Five-Number Summaries
 ln_summary = ln_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -173,7 +234,23 @@ ln_table = ln_summary.reset_index().values.tolist()
 # Print the table using tabulate
 print(tabulate(ln_table, headers='firstrow', tablefmt='grid'))
 
+# Creating a box plot
+ln_df.boxplot(figsize=(10, 6))
 
+# Setting title and labels
+plt.title('Box Plot of Logistic Nodes')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
+
+""""""""""""""""""
+
+# Dropping Unessary Columns
+lnh_df = lnh_df.drop(columns=['Unnamed: 0'])
+
+# Generating Five-Number Summaries
 lnh_summary = lnh_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -182,7 +259,23 @@ lnh_table = lnh_summary.reset_index().values.tolist()
 # Print the table using tabulate
 print(tabulate(lnh_table, headers='firstrow', tablefmt='grid'))
 
+# Creating a box plot
+lnh_df.boxplot(figsize=(10, 6))
 
+# Setting title and labels
+plt.title('Box Plot of Logistic Nodes Hospitals')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
+
+""""""""""""""""""
+
+# Dropping Unessary Columns
+lns_df = lns_df.drop(columns=['Unnamed: 0'])
+
+# Generating Five-Number Summaries
 lns_summary = lns_df.describe()
 
 # Convert the description to a list of lists for tabulate
@@ -190,5 +283,16 @@ lns_table = lns_summary.reset_index().values.tolist()
 
 # Print the table using tabulate
 print(tabulate(lns_table, headers='firstrow', tablefmt='grid'))
+
+# Creating a box plot
+lns_df.boxplot(figsize=(10, 6))
+
+# Setting title and labels
+plt.title('Box Plot of Logistic Nodes Shelters')
+plt.xlabel('Columns')
+plt.ylabel('Values')
+
+# Show the plot
+plt.show()
 
 #%%
