@@ -765,11 +765,11 @@ else:
 t_stat, p_val = stats.ttest_ind(mobilel_df[mobilel_df['network_paths'] == 'Path_A']['vehicle_speeds'], 
                                 mobilel_df[mobilel_df['network_paths'] == 'Path_B']['vehicle_speeds'])
 if p_val < 0.05:
-    print(f"RQ1: Reject Null Hypothesis - Planned network path locations influence speed for mobile logistics\
-post-Hurricane Idalia hitting Keaston Beach, Florida.  (p-value: {p_val})")
-else:
-    print(f"RQ1: Fail to reject Null Hypothesis - Planned network path locations do not influence speed \
+    print(f"RQ1: Reject Null Hypothesis - Planned network path locations do not influence speed \
 for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val})")
+else:
+    print(f"RQ1: Fail to reject Null Hypothesis - Planned network path locations influence speed \
+for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida.  (p-value: {p_val})")
    
 
 # RQ2: How would planned network path locations influence throughput for mobile logistics
@@ -777,10 +777,10 @@ for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-va
 t_stat2, p_val2 = stats.ttest_ind(mobilel_df[mobilel_df['network_paths'] == 'Path_A']['vehicle_throughputs'], 
                                    mobilel_df[mobilel_df['network_paths'] == 'Path_B']['vehicle_throughputs'])
 if p_val2 < 0.05:
-    print(f"RQ2: Reject Null Hypothesis - Planned network path locations influence throughput for mobile\
-logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val2})")
+    print(f"RQ2: Reject Null Hypothesis - Planned network path locations do not influence throughput for \
+mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val2})")
 else:
-    print(f"RQ2: Fail to reject Null Hypothesis - Planned network path locations do not influence throughput for \
+    print(f"RQ2: Fail to reject Null Hypothesis - Planned network path locations influence throughput for \
 mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val2})")
 
 
@@ -788,10 +788,10 @@ mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value:
 # Idalia hitting Keaston Beach, Florida
 t_stat3, p_val3 = stats.ttest_ind(mobilel_df['vehicle_capacities'], mobilel_df['vehicle_speeds'])
 if p_val3 < 0.05:
-    print(f"RQ3: Reject Null Hypothesis - Capacities influence speed for mobile logistics post-Hurricane\
-Idalia hitting Keaston Beach, Florida. (p-value: {p_val3})")
+    print(f"RQ3: Reject Null Hypothesis - Capacities do not influence speed for mobile logistics\
+post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val3})")
 else:
-    print(f"RQ3: Fail to reject Null Hypothesis - Capacities do not influence speed for mobile logistics\
+    print(f"RQ3: Fail to reject Null Hypothesis - Capacities influence speed for mobile logistics\
 post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val3})")
 
 
@@ -799,11 +799,11 @@ post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val3})")
 # Idalia hitting Keaston Beach, Florida?
 t_stat4, p_val4 = stats.ttest_ind(mobilel_df['vehicle_capacities'], mobilel_df['vehicle_throughputs'])
 if p_val4 < 0.05:
-    print(f"RQ4: Reject Null Hypothesis - Capacities influence throughput for mobile logistics\
+    print(f"RQ4: Reject Null Hypothesis - Capacities do not influence throughput for mobile logistics\
 post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val4})")
 else:
-    print(f"RQ4: Fail to reject Null Hypothesis - Capacities do not influence throughput for mobile\
-logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val4})")
+    print(f"RQ4: Fail to reject Null Hypothesis - Capacities influence throughput for mobile logistics\
+post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val4})")
 
 
 # RQ5: How would logistics node locations, capabilities, and capacities influence 
@@ -812,10 +812,10 @@ t_stat5, p_val5 = stats.ttest_ind(mobilel_df[mobilel_df['network_paths'] == 'Pat
                                   mobilel_df[mobilel_df['network_paths'] == 'Path_B']['vehicle_speeds'])
 if p_val5 < 0.05:
     print(f"RQ5: Reject Null Hypothesis - Logistics node locations, capabilities, and capacities\
-influence speed for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val5})")
+do not influence the speed of mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val5})")
 else:
     print(f"RQ5: Fail to reject Null Hypothesis - Logistics node locations, capabilities, and capacities\
-do not influence the speed of mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val5})")
+influence speed for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val5})")
 
 
 # RQ6: How would logistics node locations, capabilities, and capacities 
@@ -823,10 +823,10 @@ do not influence the speed of mobile logistics post-Hurricane Idalia hitting Kea
 t_stat6, p_val6 = stats.ttest_ind(mobilel_df[mobilel_df['network_paths'] == 'Path_A']['vehicle_throughputs'], 
                                   mobilel_df[mobilel_df['network_paths'] == 'Path_B']['vehicle_throughputs'])
 if p_val6 < 0.05:
-    print(f"RQ6: Reject Null Hypothesis - Logistics node locations, capabilities, and capacities influence\
+    print(f"RQ6: Reject Null Hypothesis -  Logistics node locations, capabilities, and capacities do not influence\
 throughput for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val6})")
 else:
-    print(f"RQ6: Fail to reject Null Hypothesis -  Logistics node locations, capabilities, and capacities do not influence\
+    print(f"RQ6: Fail to reject Null Hypothesis -  Logistics node locations, capabilities, and capacities influence\
 throughput for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val6})")
 
 
@@ -838,7 +838,7 @@ if p_val7 < 0.05:
     print(f"RQ7: Reject Null Hypothesis - Evacuation means, capabilities, and capacities influence\
 speed post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val7})")
 else:
-    print(f"RQ7: Fail to reject Null Hypothesis - Evacuation means, capabilities, and capacities do not influence\
+    print(f"RQ7: Fail to reject Null Hypothesis - Evacuation means, capabilities, and capacities influence\
 speed post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val7})")
 
 
@@ -847,7 +847,7 @@ speed post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val7})"
 t_stat8, p_val8 = stats.ttest_ind(mobilel_df[mobilel_df['vehicle_capacities'] > 7]['vehicle_throughputs'], 
                                   mobilel_df[mobilel_df['vehicle_capacities'] <= 7]['vehicle_throughputs'])
 if p_val8 < 0.05:
-    print(f"RQ8: Reject Null Hypothesis - Evacuation means, capabilities, and capacities influence\
+    print(f"RQ8: Reject Null Hypothesis - Evacuation means, capabilities, and capacities do not influence\
 throughput post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val8})")
 else:
     print(f"RQ8: Fail to reject Null Hypothesis - Evacuation means, capabilities, and capacities do not influence\
@@ -880,11 +880,11 @@ chi2_stat, p_val_chi2, dof, expected = stats.chi2_contingency(contingency_table)
 # post-Hurricane Idalia hitting Keaston Beach, Florida?
 
 if p_val_chi2 < 0.05:
-    print(f"Chi-Square Test RQ1: Reject Null Hypothesis - Planned network path locations influence speed\
+    print(f"Chi-Square Test RQ1: Reject Null Hypothesis - Planned network path locations do not influence speed\
 for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val_chi2})")
 else:
-    print(f"Chi-Square Test RQ1: Fail to reject Null Hypothesis - Planned network path locations do not influence speed\
-for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida.  (p-value: {p_val_chi2})")
+    print(f"Chi-Square Test RQ1: Fail to reject Null Hypothesis - Planned network path locations influence speed\
+for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida.   (p-value: {p_val_chi2})")
 
 print(contingency_table)
 
@@ -907,11 +907,11 @@ chi2_stat, p_val_chi2, dof, expected = stats.chi2_contingency(contingency_table2
 # post-Hurricane Idalia hitting Keaston Beach, Florida?
 
 if p_val_chi2 < 0.05:
-    print(f"Chi-Square Test RQ2: Reject Null Hypothesis - Planned network path locations influence throughput for mobile\
-logistics post-Hurricane Idalia hitting Keaston Beach, Florida.(p-value: {p_val_chi2})")
+    print(f"Chi-Square Test RQ2: Reject Null Hypothesis - Planned network path locations do not influence\
+throughput for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida.(p-value: {p_val_chi2})")
 else:
-    print(f"Chi-Square Test RQ2: Fail to reject Null Hypothesis - Planned network path locations do not influence\
- throughput for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val_chi2})")
+    print(f"Chi-Square Test RQ2: Fail to reject Null Hypothesis - Planned network path locations influence\
+throughput for mobile logistics post-Hurricane Idalia hitting Keaston Beach, Florida. (p-value: {p_val_chi2})")
     
 print(contingency_table2)
 
