@@ -27,8 +27,10 @@ from adjustText import adjust_text
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import KFold
 from matplotlib.animation import FuncAnimation
+from sklearn.metrics import roc_curve, auc
+from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
 from os import pipe
 pipe
 pd.options.display.max_rows = 9999
@@ -1036,3 +1038,44 @@ cv_results = cross_val_score(model, X_scaled, y, cv=kf, scoring='neg_mean_square
 
 print(f"K-Fold Cross Validation Results: {cv_results}")
 print(f"Mean Squared Error (MSE) across folds: {-cv_results.mean()}")
+
+#%%
+""""Generating Area Under the Curve (AUC) of the Receiver Operating Characteristic (ROC) Curve """""
+
+# Creating a Receiver Operating Characteristic (ROC)Curve to identify the level of Prediction for the DES Model 
+# and AUC Based on Evacuated People that features vehicle_speeds, vehicle_throughputs, and vehicle_capacities
+# and targets evacuation_high
+
+# Converting regression targets to binary classification (evacuated_people)
+threshold = mobilel_df['evacuated_people'].median()
+mobilel_df['evacuation_high'] = (mobilel_df['evacuated_people'] > threshold).astype(int)
+
+# Specifing Features and targets vehicle_speeds, vehicle_throughputs, evacuation_high, and vehicle_capacities
+X = mobilel_df[['vehicle_speeds', 'vehicle_throughputs', 'vehicle_capacities']]
+y = mobilel_df['evacuation_high']
+
+# Standardizing features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Applying Logistic Regression
+clf = LogisticRegression()
+clf.fit(X_scaled, y)
+
+# Predicting probabilities
+y_prob = clf.predict_proba(X_scaled)[:, 1]
+
+# Computing ROC curve and AUC
+fpr, tpr, thresholds = roc_curve(y, y_prob)
+roc_auc = auc(fpr, tpr)
+
+# Ploting ROC Curve
+plt.figure(figsize=(8, 6))
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve for High Evacuation Prediction')
+plt.legend(loc="lower right")
+plt.grid(True)
+plt.show()
